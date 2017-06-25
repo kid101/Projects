@@ -9,8 +9,11 @@ public class Test {
 	public static void main(String[] args){
 		Test test = new Test();
 		// test.startWork();
+		//SemaphoreTest sTest= new SemaphoreTest();
 		//test.concWork();
 		test.LockWork();
+		//sTest.relaseLock();
+		//sTest.test();
 		//to check if lock.intureptly actually throws and exception
 		//test.inturreptWork();
 		//Main group

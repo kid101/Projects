@@ -2,6 +2,7 @@ package com.test.main;
 
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -20,7 +21,7 @@ public class WithLock {
 	Condition isEmpty = lock.newCondition();
 	Condition isFull = lock.newCondition();
 	int limit = 10;
-	volatile int interruptCounter = 0;
+	volatile AtomicInteger interruptCounter = new AtomicInteger(0);
 
 	public void produce() {
 		System.out.println("WithLock.produce() Name: " + Thread.currentThread().getName());
@@ -42,8 +43,10 @@ public class WithLock {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.out.println("I was interupted Producer");
-				interruptCounter++;
+				interruptCounter.incrementAndGet();
 				System.out.println("interruptCounter value :" + interruptCounter);
+				System.out.println("<========Producer Intereupted=======>");
+				break;
 			} finally {
 				lock.unlock();
 				System.out.println("Finally Unlocked Producuer");
@@ -62,7 +65,7 @@ public class WithLock {
 				if (linkedList.size() == 0) {
 					System.out.println("acquiring lock in consume");
 					isFull.await(3000, TimeUnit.MILLISECONDS);
-					if (interruptCounter > 2) {
+					if (interruptCounter.get() > 2) {
 						break;
 					}
 				}
@@ -70,8 +73,8 @@ public class WithLock {
 				isEmpty.signal();
 				System.out.println("notifiedy lock in consume");
 				Thread.sleep(1000);
-				if (interruptCounter != 0) {
-					interruptCounter++;
+				if (interruptCounter.get() != 0) {
+					interruptCounter.incrementAndGet();
 				}
 			} catch (InterruptedException e) {
 				System.out.println("I was Interupted Consumer");
