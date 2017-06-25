@@ -12,6 +12,9 @@ public class SemaphoreTest {
 	 * Some other thread interrupts the current thread.
 	 * 
 	 * as a result I've to call release first to make a permit available and the acquire to get the lock
+	 * 
+	 * 
+	 * Mutex is a mutually exclusive sepmaphore which has only one permit. one one thread can execute the code at a single time. 
 	 */
 	Semaphore semaphore = new Semaphore(0);
 
