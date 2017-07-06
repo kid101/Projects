@@ -1,8 +1,5 @@
 package com.test.ds;
 
-import java.awt.MultipleGradientPaint.CycleMethod;
-import java.util.concurrent.CountDownLatch;
-
 public class LinkedListADT {
 	Node head;
 
@@ -158,6 +155,23 @@ public class LinkedListADT {
 		}
 		head = previousNode;
 	}
+	//Overloaded method
+	public Node reverse(Node currentNode) {
+		if (currentNode == null) {
+			return currentNode;
+		}
+		Node previousNode = null;
+		Node nextNode = null;
+		while (currentNode != null) {
+			nextNode = currentNode.next;
+			currentNode.next = previousNode;
+			previousNode = currentNode;
+			currentNode = nextNode;
+		}
+		currentNode = previousNode;
+		return currentNode;
+	}
+
 
 	public void sortInsertedNode(int newval) {
 		if (head == null) {
@@ -210,5 +224,30 @@ public class LinkedListADT {
 			}
 			currentNode = currentNode.next;
 		}
+	}
+	public void rearrange(){
+		Node firstList=head;
+		Node tempNode=null;
+		Node slowNode=head;
+		Node fastNode=head;
+		while(slowNode!=null && fastNode!=null && fastNode.next!=null){
+			slowNode=slowNode.next;
+			fastNode=fastNode.next.next;
+		}
+		Node midNode=slowNode;
+		Node secondList=midNode.next;
+		Node backupSecondList=midNode.next;
+		slowNode.next=null;
+		secondList=reverse(secondList);
+		Node helpNode=secondList;
+		while(secondList!=null ||firstList.next!=null||firstList!=null){
+			
+			tempNode=firstList.next;
+			
+			firstList.next=secondList;
+			secondList=secondList.next;
+			firstList=firstList.next;
+		}
+		head=firstList;
 	}
 }

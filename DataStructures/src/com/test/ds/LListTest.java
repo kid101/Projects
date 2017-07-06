@@ -13,17 +13,18 @@ public class LListTest {
 		adt.insert(2);
 		adt.insert(3);
 		adt.insert(4);
-		adt.insert(5);
-		adt.insert(16);
-		adt.insert(17);
-		adt.insert(27);
+		adt.insert(15);
 		System.out.println("List before adding");
 		adt.printLListADT();
 		System.out.println("List after adding");
-		adt.sortInsertedNode(26);
+		adt.sortInsertedNode(12);
 		adt.printLListADT();
-		System.out.println("Rotating List at 4");
-		adt.rotateList(4);
+		System.out.println("Rotating List at 3");
+		adt.rotateList(3);
+		adt.printLListADT();
+		
+		System.out.println("reagarnging");
+		adt.rearrange();
 		adt.printLListADT();
 		/*adt.removeAll(1);
 		System.out.println("List after removing");
