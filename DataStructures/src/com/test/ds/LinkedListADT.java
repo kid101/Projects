@@ -155,7 +155,8 @@ public class LinkedListADT {
 		}
 		head = previousNode;
 	}
-	//Overloaded method
+
+	// Overloaded method
 	public Node reverse(Node currentNode) {
 		if (currentNode == null) {
 			return currentNode;
@@ -171,7 +172,6 @@ public class LinkedListADT {
 		currentNode = previousNode;
 		return currentNode;
 	}
-
 
 	public void sortInsertedNode(int newval) {
 		if (head == null) {
@@ -211,40 +211,39 @@ public class LinkedListADT {
 		Node tempNode = null;
 		for (int i = 0; currentNode != null; i++) {
 			if (i == pivotal) {
-				//tempNode is the new Tail
-				tempNode=currentNode;
-				newStart=currentNode.next;
+				// tempNode is the new Tail
+				tempNode = currentNode;
+				newStart = currentNode.next;
 				while (currentNode.next != null) {
-					currentNode=currentNode.next;
+					currentNode = currentNode.next;
 				}
-				tempNode.next=null;
-				currentNode.next=head;
-				head=newStart;
+				tempNode.next = null;
+				currentNode.next = head;
+				head = newStart;
 				return;
 			}
 			currentNode = currentNode.next;
 		}
 	}
-	public void rearrange(){
-		Node firstList=head;
-		Node tempNode=null;
-		Node slowNode=head;
-		Node fastNode=head;
-		while(slowNode!=null && fastNode!=null && fastNode.next!=null){
-			slowNode=slowNode.next;
-			fastNode=fastNode.next.next;
+
+	public void rearrange() {
+		Node firstList = head;
+		Node slowNode = head;
+		Node fastNode = head;
+		while (slowNode != null && fastNode != null && fastNode.next != null) {
+			slowNode = slowNode.next;
+			fastNode = fastNode.next.next;
 		}
-		Node midNode=slowNode;
-		Node secondList=midNode.next;
-		Node backupSecondList=midNode.next;
-		slowNode.next=null;
-		secondList=reverse(secondList);
-		Node helpNode=secondList;
+		Node midNode = slowNode;
+		Node secondList = midNode.next;
+		slowNode.next = null;
+		secondList = reverse(secondList);
+		// merging two lists
 		while (secondList != null) {
 			Node temp1 = firstList.next;
 			Node temp2 = secondList.next;
 			firstList.next = secondList;
-			secondList.next = temp1;		
+			secondList.next = temp1;
 			firstList = temp1;
 			secondList = temp2;
 		}
