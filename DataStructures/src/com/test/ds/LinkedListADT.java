@@ -240,14 +240,13 @@ public class LinkedListADT {
 		slowNode.next=null;
 		secondList=reverse(secondList);
 		Node helpNode=secondList;
-		while(secondList!=null ||firstList.next!=null||firstList!=null){
-			
-			tempNode=firstList.next;
-			
-			firstList.next=secondList;
-			secondList=secondList.next;
-			firstList=firstList.next;
+		while (secondList != null) {
+			Node temp1 = firstList.next;
+			Node temp2 = secondList.next;
+			firstList.next = secondList;
+			secondList.next = temp1;		
+			firstList = temp1;
+			secondList = temp2;
 		}
-		head=firstList;
 	}
 }
